@@ -357,8 +357,8 @@ module Wice
         relation = @relation
                        .includes(@ar_options[:include])
                        .joins(@ar_options[:joins])
-                       .group(@ar_options[:group])
                        .merge(@ar_options[:conditions])
+        relation = relation.group(@ar_options[:group]) if @ar_options[:group].present?
         relation = add_references relation
         relation = apply_sort_by relation
 
