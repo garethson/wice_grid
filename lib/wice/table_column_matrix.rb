@@ -56,7 +56,8 @@ module Wice
     def init_columns_of_table(model) #:nodoc:
       self[model] = HashWithIndifferentAccess.new(model.columns.index_by(&:name))
       @by_table_names[model.table_name] = self[model]
-      self[model].each_value { |c| c.model = model }
+      # Breaks rails 6.1.3, and doesn't appear to be needed for read-only functionality
+      # self[model].each_value { |c| c.model = model }
     end
 
     alias_method :<<, :init_columns_of_table
